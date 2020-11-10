@@ -26,8 +26,8 @@ namespace API
                 if (env.IsDevelopment())
                 {
                     ctx.Add(new Value { Id = 1, Name = "Value 1" });
-                    ctx.Add(new Value { Id = 2, Name = "Value 1" });
-                    ctx.Add(new Value { Id = 3, Name = "Value 1" });
+                    ctx.Add(new Value { Id = 2, Name = "Value 2" });
+                    ctx.Add(new Value { Id = 3, Name = "Value 3" });
 
                     ctx.SaveChanges();
                 }
