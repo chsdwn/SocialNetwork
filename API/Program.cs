@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,13 +23,7 @@ namespace API
                 var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
 
                 if (env.IsDevelopment())
-                {
-                    ctx.Add(new Value { Id = 1, Name = "Value 1" });
-                    ctx.Add(new Value { Id = 2, Name = "Value 2" });
-                    ctx.Add(new Value { Id = 3, Name = "Value 3" });
-
-                    ctx.SaveChanges();
-                }
+                    Seed.SeedData(ctx);
             }
 
             host.Run();

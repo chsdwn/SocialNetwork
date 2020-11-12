@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Activities;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,11 +33,14 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(opts => opts.UseInMemoryDatabase("Dev"));
+            services.AddMediatR(typeof(List.Handler).Assembly);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                // Fix: Can't use schemaId error
+                c.CustomSchemaIds(schemaIdSelector => schemaIdSelector.FullName);
             });
 
             services.AddCors(opts =>
